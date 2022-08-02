@@ -2,6 +2,7 @@
 $ip=($_GET["ip"]);
 $login="admin";
 $haslo="";
+$url="";
 
 $connection = ssh2_connect($ip, 22);
 ssh2_auth_password($connection, $login, $haslo);
@@ -38,7 +39,7 @@ cambium_urządzenie($mac);
 function cambium_urządzenie($mac){
   $curl = curl_init();
   curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://wifi4eu.wave.com.pl/api/v1/devices/'.$mac,
+    CURLOPT_URL => '$url'.$mac,
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_SSL_VERIFYPEER => false,
     CURLOPT_SSL_VERIFYHOST => false,
@@ -49,7 +50,7 @@ function cambium_urządzenie($mac){
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'GET',
     CURLOPT_HTTPHEADER => array(
-        'Authorization: Bearer d076b4bab90b5e188846fc18bf52b05d93e5ea40'
+        'Authorization: '
     ),
   ));
 $blad=curl_error($curl);
